@@ -1,6 +1,6 @@
 prefixes:
-  mv: "http://schema.mobivoc.org/"
-  dc: "http://purl.org/dc/terms/"
+  mv: 'http://schema.mobivoc.org/'
+  dc: 'http://purl.org/dc/terms/'
 
 mappings:
   capacity:
