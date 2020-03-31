@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "description": "A server to host linked time series data as linked data fragments",
   "main": "bin/timeseries-server.js",
+  "type": "module",
   "dependencies": {
     "@rmlio/rmlmapper-java-wrapper": "^0.1.1",
     "@rmlio/yarrrml-parser": "^0.3.11",
