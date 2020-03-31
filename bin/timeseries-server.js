@@ -1,7 +1,16 @@
-const CommunicationManager = require('../lib/CommunicationManager');
-const Configuration = require('../lib/Configuration');
-const SourceReader = require('../lib/SourceReader');
-const DataEventManager = require('../lib/DataEventManager');
+import CommunicationManager from '../lib/CommunicationManager.js';
+import Configuration from '../lib/Configuration.js';
+import SourceReader from '../lib/SourceReader.js';
+import DataEventManager from '../lib/DataEventManager.js';
+
+const loadInterfaceModules = async (source, commManager) => {
+  let int = Object.keys(source.interfaces);
+  for (let i in int) {
+    let { default: Interface } = await import(process.cwd() + '/' + source.interfaces[int[i]]);
+
+    new Interface(source, commManager);
+  }
+};
 
 try {
   // Read config file
@@ -36,12 +45,4 @@ try {
 } catch (e) {
   console.error(e);
   process.exit(1);
-}
-
-function loadInterfaceModules(source, commManager) {
-  let int = Object.keys(source.interfaces);
-  for (let i in int) {
-    let Interface = require(process.cwd() + '/' + source.interfaces[int[i]]);
-    new Interface(source, commManager);
-  }
 }

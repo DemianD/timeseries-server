@@ -7,7 +7,7 @@
       "name": "kortrijk",
       "sourceUrl": "https://stallingsnet.nl/api/3/parkingcount/kortrijk?apiKey=NzgxOlduaEFfU0t2Z2FicDRKaWh0bXVzNTFUN3pKUT0=",
       "interfaces": {
-        "RawData": "lib/interfaces/RawData"
+        "RawData": "lib/interfaces/RawData.js"
       },
       "outputPath": "/home/julian/data/velopark/live",
       "refreshInterval": "*/10 * * * * *",
@@ -30,7 +30,7 @@
       "name": "gent",
       "sourceUrl": "https://datatank.stad.gent/4/mobiliteit/realtimebezettingfietsenstallingen.json",
       "interfaces": {
-        "RawData": "lib/interfaces/RawData"
+        "RawData": "lib/interfaces/RawData.js"
       },
       "outputPath": "/home/julian/data/velopark/live",
       "refreshInterval": "*/5 * * * * *",
@@ -57,7 +57,7 @@
       "name": "vilvoorde",
       "sourceUrl": "https://api.fietskluis-app.nl/public-api/locations/8b842ad4-6193-42fc-b1ee-591226fb2ce4",
       "interfaces": {
-        "RawData": "lib/interfaces/RawData"
+        "RawData": "lib/interfaces/RawData.js"
       },
       "outputPath": "/home/julian/data/velopark/live",
       "refreshInterval": "*/15 * * * * *",
