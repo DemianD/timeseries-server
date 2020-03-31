@@ -103,7 +103,7 @@ To test the server a RDF stream can be piped into the server. We can pipe the ex
 ```bash
 $ cd timeseries-server
 $ npm install -g replay-timeseries
-$ cat parking_data.trig | replay-timeseries -s 10x | node bin/timeseries-server.js -c config.json
+$ cat ./example/data/parking_data.trig | replay-timeseries -s 10x | node bin/timeseries-server.js -c config.json
 ```
 
 As the original observations were made every 30 seconds, we use `replay-timeseries -s 10x` to replay them every 3 seconds (10 times faster). This tool also rewrites the `prov:generatedAtTime` value to the current time for testing purposes.
