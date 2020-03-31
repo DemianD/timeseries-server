@@ -4,31 +4,31 @@ import SourceReader from '../lib/SourceReader.js';
 import DataEventManager from '../lib/DataEventManager.js';
 
 const loadInterfaceModules = async (source, commManager) => {
-  let int = Object.keys(source.interfaces);
-  for (let i in int) {
-    let { default: Interface } = await import(process.cwd() + '/' + source.interfaces[int[i]]);
-
+  Object.values(source.interfaces).map(async interfaceModule => {
+    let { default: Interface } = await import(process.cwd() + '/' + interfaceModule);
     new Interface(source, commManager);
-  }
+  });
 };
 
 try {
   // Read config file
   let config = Configuration.getConfig(process.argv);
+
   // Init Communication Manager module
   let commManager = new CommunicationManager(config);
 
   // Process data source
-  for (let i in config.sources) {
+  config.sources.forEach(source => {
     // Load multidimensional interfaces
-    loadInterfaceModules(config.sources[i], commManager);
+    loadInterfaceModules(source, commManager);
 
-    let source = new SourceReader(config.sources[i], config.hostName + config.liveUriPath);
-    source.on('data', data => {
+    let sourceReader = new SourceReader(source, config.hostName + config.liveUriPath);
+
+    sourceReader.on('data', data => {
       // Launch data event towards predefined interfaces through Data Event Manager module
-      DataEventManager.push(`data-${config.sources[i].name}`, data);
+      DataEventManager.push(`data-${source.name}`, data);
     });
-  }
+  });
 
   // TODO: Define a way to configure RDF input streams
   // Listen for data on standard input
@@ -39,6 +39,7 @@ try {
   let app = commManager.app;
   let http = commManager.http;
   let ws = commManager.ws;
+
   app.use(http.routes()).use(http.allowedMethods());
   app.ws.use(ws.routes()).use(ws.allowedMethods());
   app.listen(config.httpPort);
